@@ -1,1 +1,294 @@
+```html
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Weihnachtsessen 2026 – Fund</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,500&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0908;
+    --bg-2: #1a0f0f;
+    --card: #1d1211;
+    --red: #d21f3c;
+    --red-bright: #ff3b56;
+    --red-deep: #6b0f1f;
+    --cream: #f5ede6;
+    --muted: #b08a86;
+    color-scheme: dark;
+  }
 
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    height: 100%;
+  }
+
+  body {
+    background: radial-gradient(ellipse 1300px 750px at 50% -12%, var(--bg-2) 0%, var(--bg) 62%);
+    color: var(--cream);
+    font-family: 'Manrope', system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    padding-block: max(24px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-bottom, 0px));
+    min-height: 100%;
+    overflow-x: hidden;
+  }
+
+  .fiberfield {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.55;
+  }
+  .fiberfield svg { width: 100%; height: 100%; }
+  .strand {
+    fill: none;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 6px rgba(210,31,60,0.55));
+  }
+  .pulse {
+    fill: var(--red-bright);
+    filter: drop-shadow(0 0 5px var(--red-bright));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fiberfield { display: none; }
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+    width: 100%;
+    background: linear-gradient(180deg, var(--card) 0%, #170d0c 100%);
+    border: 1px solid rgba(210,31,60,0.22);
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+
+  .code-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 22px;
+  }
+  .code-tag .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--red-bright);
+    box-shadow: 0 0 8px var(--red-bright);
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    margin: 0 0 10px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(28px, 7vw, 40px);
+    line-height: 1.1;
+    margin: 0 0 18px;
+    text-wrap: balance;
+    color: var(--cream);
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--red-bright);
+  }
+
+  .joke {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--cream);
+    margin: 0 0 28px;
+    max-width: 42ch;
+    margin-inline: auto;
+  }
+
+  .rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(210,31,60,0.4), transparent);
+    margin: 0 0 24px;
+  }
+
+  .footer-note {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .footer-note strong {
+    color: var(--red-bright);
+    font-weight: 700;
+  }
+
+  .brand {
+    margin-top: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.8;
+  }
+
+  .fiber-rule {
+    width: 100%;
+    max-width: 200px;
+    height: 3px;
+    margin: 0 auto 22px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, transparent, var(--red) 20%, var(--red-bright) 50%, var(--red) 80%, transparent);
+    background-size: 200% 100%;
+    animation: shimmer 3.2s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fiber-rule { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="fiberfield" id="fiberfield" aria-hidden="true"></div>
+
+<main class="card">
+  <div class="code-tag" id="codeTag"><span class="dot"></span><span id="codeLabel">Code —</span></div>
+
+  <div class="fiber-rule"></div>
+
+  <p class="eyebrow">FTTH-Rollout &middot; Signal verfolgt</p>
+
+  <h1>Fast <em>erwischt</em>.</h1>
+
+  <p class="joke" id="jokeText">Such weiter – der echte Gewinn versteckt sich noch irgendwo im Raum.</p>
+
+  <div class="rule"></div>
+
+  <p class="footer-note">Nur <strong>3 von 20</strong> Codes sind echte Treffer. Weitersuchen lohnt sich!</p>
+
+  <div class="brand">WD comtec &middot; Weihnachtsessen 2026</div>
+</main>
+
+<script>
+(function () {
+  var jokes = {
+    "1": "Fehlalarm – das war nur ein Baustellenabsperrband. Weitersuchen!",
+    "2": "Kabel gefunden – leider das falsche. Nochmals von vorne!",
+    "3": "Verbindung unterbrochen. Bitte Techniker rufen (oder einfach weitersuchen).",
+    "4": "Falsche Spleissbox erwischt. Kein Gewinn, aber immerhin ein Foto wert.",
+    "5": "Das war nur eine leere Kabeltrommel. Weiter geht's!",
+    "6": "Achtung Baustelle – hier gibt's nichts zu holen ausser Staub.",
+    "7": "Signal schwach... eigentlich gar keins. Nächster Versuch!",
+    "8": "Du hast den Rückweg gefunden, nicht den Gewinn. Weitersuchen!",
+    "9": "404 – Gewinn nicht gefunden. Bitte anderswo suchen.",
+    "10": "Das war ein Testlauf ohne Netz. Kein Preis für dich, sorry!",
+    "11": "Hier liegt nur ein loses Ende. Der Gewinn liegt woanders.",
+    "12": "Kurzschluss! Aber keine Sorge, nur im Spiel, nicht im Netz.",
+    "13": "Diese Faser führt ins Leere. Weitersuchen, du schaffst das!",
+    "14": "Fehlgeleitet wie ein Bauplan ohne Koordinaten. Kein Gewinn hier.",
+    "15": "Das war die Verteilerdose, nicht der Hauptgewinn.",
+    "16": "Zu spät – dieses Kabel wurde schon letztes Jahr verlegt. Nichts für dich.",
+    "17": "Glasfaser ja, Gewinn nein. Nächster Code, bitte!"
+  };
+
+  function render() {
+    var code = (location.hash || "").replace("#", "").trim();
+    var label = document.getElementById("codeLabel");
+    var joke = document.getElementById("jokeText");
+
+    if (code && jokes[code]) {
+      label.textContent = "Code " + code;
+      joke.textContent = jokes[code];
+    } else {
+      label.textContent = "Kein Code";
+      joke.textContent = "Diese Seite gehört zur QR-Code-Ratetour am Weihnachtsessen. Scanne einen der versteckten Codes im Raum!";
+    }
+  }
+
+  window.addEventListener("hashchange", render);
+  render();
+
+  // decorative glowing fiber-optic strands with traveling light pulses
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var field = document.getElementById("fiberfield");
+  if (!reduce && field) {
+    var W = window.innerWidth;
+    var H = window.innerHeight;
+    var ns = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    svg.setAttribute("preserveAspectRatio", "none");
+
+    var strandCount = W < 480 ? 5 : 8;
+    var reds = ["#d21f3c", "#ff3b56", "#8a1729"];
+
+    for (var i = 0; i < strandCount; i++) {
+      var y0 = (H / (strandCount + 1)) * (i + 1) + (Math.random() * 60 - 30);
+      var x1 = W * 0.15, x2 = W * 0.4, x3 = W * 0.6, x4 = W * 0.85;
+      var y1 = y0 + (Math.random() * 80 - 40);
+      var y2 = y0 + (Math.random() * 80 - 40);
+      var y3 = y0 + (Math.random() * 80 - 40);
+      var d = "M -20," + y0 + " C " + x1 + "," + y1 + " " + x2 + "," + y2 + " " + x3 + "," + y3 + " S " + x4 + "," + y0 + " " + (W + 20) + "," + y3;
+
+      var path = document.createElementNS(ns, "path");
+      path.setAttribute("d", d);
+      path.setAttribute("class", "strand");
+      path.setAttribute("stroke", reds[i % reds.length]);
+      path.setAttribute("stroke-opacity", (0.25 + Math.random() * 0.35).toFixed(2));
+      var pathId = "strand-" + i;
+      path.setAttribute("id", pathId);
+      svg.appendChild(path);
+
+      var pulse = document.createElementNS(ns, "circle");
+      pulse.setAttribute("r", "3.2");
+      pulse.setAttribute("class", "pulse");
+      var anim = document.createElementNS(ns, "animateMotion");
+      anim.setAttribute("dur", (5 + Math.random() * 5).toFixed(1) + "s");
+      anim.setAttribute("repeatCount", "indefinite");
+      anim.setAttribute("begin", (-Math.random() * 8).toFixed(1) + "s");
+      var mpath = document.createElementNS(ns, "mpath");
+      mpath.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#" + pathId);
+      mpath.setAttribute("href", "#" + pathId);
+      anim.appendChild(mpath);
+      pulse.appendChild(anim);
+      svg.appendChild(pulse);
+    }
+
+    field.appendChild(svg);
+  }
+})();
+</script>
+
+</body>
+</html>
+```
+
+Einfach den kompletten Inhalt deiner `index.html` auf GitHub damit ersetzen.
