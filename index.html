@@ -120,15 +120,6 @@
     color: var(--red-bright);
   }
 
-  .joke {
-    font-size: 17px;
-    line-height: 1.55;
-    color: var(--cream);
-    margin: 0 0 28px;
-    max-width: 42ch;
-    margin-inline: auto;
-  }
-
   .rule {
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(210,31,60,0.4), transparent);
@@ -179,15 +170,13 @@
 <div class="fiberfield" id="fiberfield" aria-hidden="true"></div>
 
 <main class="card">
-  <div class="code-tag" id="codeTag"><span class="dot"></span><span id="codeLabel">Code —</span></div>
+  <div class="code-tag"><span class="dot"></span><span>Kein Gewinn</span></div>
 
   <div class="fiber-rule"></div>
 
-  <p class="eyebrow">FTTH-Rollout &middot; Signal verfolgt</p>
+  <p class="eyebrow">Signal lädt</p>
 
-  <h1>Fast <em>erwischt</em>.</h1>
-
-  <p class="joke" id="jokeText">Such weiter – der echte Gewinn versteckt sich noch irgendwo im Raum.</p>
+  <h1>Code gefunden &ndash; leider der falsche. Weitergraben!</h1>
 
   <div class="rule"></div>
 
@@ -198,43 +187,6 @@
 
 <script>
 (function () {
-  var jokes = {
-    "1": "Fehlalarm – das war nur ein Baustellenabsperrband. Weitersuchen!",
-    "2": "Kabel gefunden – leider das falsche. Nochmals von vorne!",
-    "3": "Verbindung unterbrochen. Bitte Techniker rufen (oder einfach weitersuchen).",
-    "4": "Falsche Spleissbox erwischt. Kein Gewinn, aber immerhin ein Foto wert.",
-    "5": "Das war nur eine leere Kabeltrommel. Weiter geht's!",
-    "6": "Achtung Baustelle – hier gibt's nichts zu holen ausser Staub.",
-    "7": "Signal schwach... eigentlich gar keins. Nächster Versuch!",
-    "8": "Du hast den Rückweg gefunden, nicht den Gewinn. Weitersuchen!",
-    "9": "404 – Gewinn nicht gefunden. Bitte anderswo suchen.",
-    "10": "Das war ein Testlauf ohne Netz. Kein Preis für dich, sorry!",
-    "11": "Hier liegt nur ein loses Ende. Der Gewinn liegt woanders.",
-    "12": "Kurzschluss! Aber keine Sorge, nur im Spiel, nicht im Netz.",
-    "13": "Diese Faser führt ins Leere. Weitersuchen, du schaffst das!",
-    "14": "Fehlgeleitet wie ein Bauplan ohne Koordinaten. Kein Gewinn hier.",
-    "15": "Das war die Verteilerdose, nicht der Hauptgewinn.",
-    "16": "Zu spät – dieses Kabel wurde schon letztes Jahr verlegt. Nichts für dich.",
-    "17": "Glasfaser ja, Gewinn nein. Nächster Code, bitte!"
-  };
-
-  function render() {
-    var code = (location.hash || "").replace("#", "").trim();
-    var label = document.getElementById("codeLabel");
-    var joke = document.getElementById("jokeText");
-
-    if (code && jokes[code]) {
-      label.textContent = "Code " + code;
-      joke.textContent = jokes[code];
-    } else {
-      label.textContent = "Kein Code";
-      joke.textContent = "Diese Seite gehört zur QR-Code-Ratetour am Weihnachtsessen. Scanne einen der versteckten Codes im Raum!";
-    }
-  }
-
-  window.addEventListener("hashchange", render);
-  render();
-
   // decorative glowing fiber-optic strands with traveling light pulses
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var field = document.getElementById("fiberfield");
@@ -288,5 +240,3 @@
 
 </body>
 </html>
-
-Einfach den kompletten Inhalt deiner `index.html` auf GitHub damit ersetzen.
