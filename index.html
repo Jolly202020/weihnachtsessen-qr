@@ -287,6 +287,7 @@
       .then(function (data) {
         if (data.result === "claimed") { done(data); return; }
         if (data.result === "used") { show("used"); footer(data, "used"); return; }
+        if (data.result === "already") { try { localStorage.removeItem(tokenKey); } catch (e) {} show("already"); footer(null, "already"); return; }
         throw new Error(data.message || "Fehler");
       })
       .catch(function () {
