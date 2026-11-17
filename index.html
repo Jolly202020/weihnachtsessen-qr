@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Weihnachtsessen 2026 – Fund</title>
+<meta name="robots" content="noindex">
+<title>Firmenessen – Fund</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,500&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -14,19 +15,17 @@
     --card: #1d1211;
     --red: #d21f3c;
     --red-bright: #ff3b56;
-    --red-deep: #6b0f1f;
+    --gold: #d4a73c;
     --cream: #f5ede6;
     --muted: #b08a86;
+    --accent: var(--red-bright);
+    --accent-soft: rgba(210,31,60,0.22);
     color-scheme: dark;
   }
+  body.win { --accent: var(--gold); --accent-soft: rgba(212,167,60,0.3); }
 
   * { box-sizing: border-box; }
-
-  html, body {
-    margin: 0;
-    height: 100%;
-  }
-
+  html, body { margin: 0; height: 100%; }
   body {
     background: radial-gradient(ellipse 1300px 750px at 50% -12%, var(--bg-2) 0%, var(--bg) 62%);
     color: var(--cream);
@@ -40,35 +39,19 @@
     overflow-x: hidden;
   }
 
-  .fiberfield {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.55;
-  }
+  .fiberfield { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.55; }
   .fiberfield svg { width: 100%; height: 100%; }
-  .strand {
-    fill: none;
-    stroke-width: 1.4;
-    stroke-linecap: round;
-    filter: drop-shadow(0 0 6px rgba(210,31,60,0.55));
-  }
-  .pulse {
-    fill: var(--red-bright);
-    filter: drop-shadow(0 0 5px var(--red-bright));
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .fiberfield { display: none; }
-  }
+  .strand { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; filter: drop-shadow(0 0 6px var(--accent-soft)); }
+  .pulse { fill: var(--accent); filter: drop-shadow(0 0 5px var(--accent)); }
+  @media (prefers-reduced-motion: reduce) { .fiberfield { display: none; } }
 
   .card {
     position: relative;
     z-index: 1;
-    max-width: 520px;
+    max-width: 500px;
     width: 100%;
     background: linear-gradient(180deg, var(--card) 0%, #170d0c 100%);
-    border: 1px solid rgba(210,31,60,0.22);
+    border: 1px solid var(--accent-soft);
     border-radius: 20px;
     padding: 40px 32px;
     text-align: center;
@@ -76,148 +59,263 @@
   }
 
   .code-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.12em;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.12em;
     color: var(--muted);
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.09);
-    border-radius: 999px;
-    padding: 6px 14px;
-    margin-bottom: 22px;
+    border-radius: 999px; padding: 6px 14px; margin-bottom: 22px;
   }
-  .code-tag .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--red-bright);
-    box-shadow: 0 0 8px var(--red-bright);
-  }
-
-  .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--red-bright);
-    margin: 0 0 10px;
-  }
-
-  h1 {
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 700;
-    font-size: clamp(28px, 7vw, 40px);
-    line-height: 1.1;
-    margin: 0 0 18px;
-    text-wrap: balance;
-    color: var(--cream);
-  }
-  h1 em {
-    font-style: italic;
-    color: var(--red-bright);
-  }
-
-  .rule {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(210,31,60,0.4), transparent);
-    margin: 0 0 24px;
-  }
-
-  .footer-note {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-  .footer-note strong {
-    color: var(--red-bright);
-    font-weight: 700;
-  }
-
-  .brand {
-    margin-top: 28px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    opacity: 0.8;
-  }
+  .code-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
 
   .fiber-rule {
-    width: 100%;
-    max-width: 200px;
-    height: 3px;
-    margin: 0 auto 22px;
-    border-radius: 3px;
-    background: linear-gradient(90deg, transparent, var(--red) 20%, var(--red-bright) 50%, var(--red) 80%, transparent);
+    width: 100%; max-width: 200px; height: 3px; margin: 0 auto 22px; border-radius: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent) 20%, #ffffff88 50%, var(--accent) 80%, transparent);
     background-size: 200% 100%;
     animation: shimmer 3.2s ease-in-out infinite;
   }
-  @keyframes shimmer {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+  @keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  @media (prefers-reduced-motion: reduce) { .fiber-rule { animation: none; } }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 10px;
   }
-  @media (prefers-reduced-motion: reduce) {
-    .fiber-rule { animation: none; }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 700;
+    font-size: clamp(28px, 7vw, 40px); line-height: 1.1;
+    margin: 0 0 16px; text-wrap: balance; color: var(--cream);
   }
+  h1 em { font-style: italic; color: var(--accent); }
+  .lead { font-size: 16px; line-height: 1.55; margin: 0 auto 24px; max-width: 40ch; }
+
+  .secret {
+    font-size: 14px; line-height: 1.5; color: var(--cream);
+    background: rgba(212,167,60,0.1); border: 1px dashed rgba(212,167,60,0.45);
+    border-radius: 12px; padding: 12px 14px; margin: 0 0 22px;
+  }
+
+  form { display: flex; flex-direction: column; gap: 14px; }
+  label { text-align: left; font-size: 13px; color: var(--muted); font-weight: 500; }
+  input[type="text"] {
+    width: 100%; padding: 14px 16px; border-radius: 12px;
+    border: 1px solid rgba(212,167,60,0.35); background: rgba(255,255,255,0.04);
+    color: var(--cream); font-family: 'Manrope', sans-serif; font-size: 16px;
+  }
+  input[type="text"]:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,167,60,0.2); }
+  button {
+    margin-top: 6px; padding: 15px 20px; border: none; border-radius: 12px;
+    background: linear-gradient(135deg, var(--gold), #c99a2e); color: #1a1410;
+    font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 16px; cursor: pointer;
+  }
+  button:active { transform: scale(0.99); }
+  button:disabled { opacity: 0.6; cursor: default; }
+  .btn-ghost { background: transparent; color: var(--cream); border: 1px solid rgba(255,255,255,0.2); }
+
+  .rule { height: 1px; background: linear-gradient(90deg, transparent, var(--accent-soft), transparent); margin: 24px 0; }
+  .footer-note { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
+  .footer-note strong { color: var(--accent); font-weight: 700; }
+  .brand {
+    margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); opacity: 0.8;
+  }
+  .error { font-size: 13px; color: var(--red-bright); display: none; margin: 0; }
+  .error.show { display: block; }
+
+  .spinner {
+    width: 36px; height: 36px; margin: 10px auto 18px; border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.12); border-top-color: var(--accent);
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  [hidden] { display: none !important; }
 </style>
 </head>
 <body>
 
 <div class="fiberfield" id="fiberfield" aria-hidden="true"></div>
 
-<main class="card">
-  <div class="code-tag"><span class="dot"></span><span>Kein Gewinn</span></div>
-
+<main class="card" id="card">
+  <div class="code-tag"><span class="dot"></span><span id="tag">Verbindung…</span></div>
   <div class="fiber-rule"></div>
 
-  <p class="eyebrow">Signal lädt</p>
+  <section id="v-loading">
+    <div class="spinner" aria-hidden="true"></div>
+    <p class="eyebrow">Signal wird geprüft</p>
+    <h1>Einen Moment…</h1>
+  </section>
 
-  <h1>Code gefunden &ndash; leider der falsche. Weitergraben!</h1>
+  <section id="v-lose" hidden>
+    <p class="eyebrow">Signal lädt</p>
+    <h1>Code gefunden &ndash; leider der falsche. Weitergraben!</h1>
+  </section>
+
+  <section id="v-used" hidden>
+    <p class="eyebrow">Leitung besetzt</p>
+    <h1>Zu spät &ndash; dieser Code wurde <em>schon eingelöst</em>.</h1>
+    <p class="lead">Jemand war schneller. Es gibt aber noch andere Treffer &ndash; weitersuchen!</p>
+  </section>
+
+  <section id="v-already" hidden>
+    <p class="eyebrow">Fair Play</p>
+    <h1>Du hast <em>schon gewonnen</em>!</h1>
+    <p class="lead">Pro Person gibt es nur einen Gewinn. Dieser Code bleibt für die anderen im Spiel &ndash; und psst, nicht verraten.</p>
+  </section>
+
+  <section id="v-win" hidden>
+    <p class="eyebrow">Signal empfangen</p>
+    <h1>Verbindung <em>hergestellt</em> – Volltreffer!</h1>
+    <p class="lead">Du hast einen echten Gewinn-Code gefunden. Trag jetzt deinen Namen ein &ndash; die Reihenfolge zählt!</p>
+    <p class="secret">🤫 <strong>Pssst &ndash; nicht verraten!</strong> Dieser Code ist ab jetzt für alle anderen gesperrt. Nur dein Handy kann ihn noch einlösen.</p>
+    <form id="winForm">
+      <label for="nameInput">Dein Name</label>
+      <input type="text" id="nameInput" name="name" placeholder="Vorname Nachname" required autocomplete="name" maxlength="60">
+      <p class="error" id="errorMsg">Bitte gib deinen Namen ein.</p>
+      <button type="submit" id="submitBtn">Jetzt eintragen 🚀</button>
+    </form>
+  </section>
+
+  <section id="v-done" hidden>
+    <p class="eyebrow">Gespeichert</p>
+    <h1 id="doneTitle">🎊 Geschafft!</h1>
+    <p class="lead" id="doneText"></p>
+  </section>
+
+  <section id="v-error" hidden>
+    <p class="eyebrow">Störung in der Leitung</p>
+    <h1>Keine Verbindung.</h1>
+    <p class="lead" id="errorText">Bitte prüfe dein Internet und versuch es nochmals.</p>
+    <button type="button" class="btn-ghost" onclick="location.reload()">Nochmal versuchen</button>
+  </section>
 
   <div class="rule"></div>
-
-  <p class="footer-note">Nur <strong>3 von 20</strong> Codes sind echte Treffer. Weitersuchen lohnt sich!</p>
-
-  <div class="brand">WD comtec &middot; Weihnachtsessen 2026</div>
+  <p class="footer-note" id="footer">Nur <strong>6 von 20</strong> Codes sind echte Treffer.</p>
+  <div class="brand">WD comtec &middot; Firmenessen</div>
 </main>
 
 <script>
 (function () {
-  // decorative glowing fiber-optic strands with traveling light pulses
+  // ► Supabase-Zugang (Project Settings → API / API Keys)
+  var SUPABASE_URL = "https://dogepdcoeikbxyheejnh.supabase.co";
+  var SUPABASE_KEY = "sb_publishable_32rDjFTIeQ7v4QO2mnCEpg_3mc-vYAI";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var views = ["loading", "lose", "used", "already", "win", "done", "error"];
+  var tags = { loading: "Verbindung…", lose: "Kein Gewinn", used: "Eingelöst", already: "Schon gewonnen", win: "Volltreffer", done: "Gespeichert", error: "Offline" };
+
+  function show(v) {
+    views.forEach(function (x) { $("v-" + x).hidden = x !== v; });
+    $("tag").textContent = tags[v];
+    document.body.classList.toggle("win", v === "win" || v === "done" || v === "already");
+  }
+
+  function getS(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function setS(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  function footer(data, v) {
+    var total = (data && data.total) || 6;
+    var offen = data && typeof data.offen === "number" ? Math.max(0, data.offen) : null;
+    var txt = "Nur <strong>" + total + " von 20</strong> Codes sind echte Treffer.";
+    if (v === "win" || v === "done") {
+      txt = "Nur <strong>" + total + " von 20</strong> Codes sind echte Treffer – du hast einen davon!";
+    } else if (offen !== null) {
+      txt += offen > 0
+        ? " Noch <strong>" + offen + "</strong> " + (offen === 1 ? "Gewinn ist" : "Gewinne sind") + " zu holen."
+        : " Alle Gewinne sind vergeben.";
+      if (v === "lose" && offen > 0) txt += " Weitersuchen lohnt sich!";
+    }
+    $("footer").innerHTML = txt;
+  }
+
+  function api(fn, body) {
+    return fetch(SUPABASE_URL.replace(/\/+$/, "") + "/rest/v1/rpc/" + fn, {
+      method: "POST",
+      headers: { "apikey": SUPABASE_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      cache: "no-store"
+    }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+  }
+
+  // Code-Nummer aus dem Link (?c=07)
+  var code = (new URLSearchParams(location.search).get("c") || "").replace(/[^0-9A-Za-z]/g, "").slice(0, 4);
+  if (/^\d$/.test(code)) code = "0" + code;
+
+  // zufällige Geräte-Kennung (nur für "ein Gewinn pro Handy")
+  var device = getS("fe_device");
+  if (!device) { device = "d" + Math.random().toString(36).slice(2) + Date.now().toString(36); setS("fe_device", device); }
+  var tokenKey = "fe_token_" + code;
+  var token = getS(tokenKey) || "";
+
+  function done(data) {
+    var first = String(data.name || "").split(" ")[0];
+    $("doneTitle").textContent = "🎊 Geschafft" + (first ? ", " + first : "") + "!";
+    $("doneText").textContent = "Du bist Gewinner Nr. " + data.rang + " von " + (data.total || 6) + ". Dein Preis wartet heute Abend bei der Preisübergabe auf dich. Und weiterhin: psst! 🤫";
+    show("done");
+    footer(data, "done");
+  }
+
+  if (!code) { show("lose"); footer(null, "lose"); }
+  else if (SUPABASE_URL.indexOf("http") !== 0) {
+    $("errorText").textContent = "Die Seite ist noch nicht fertig eingerichtet (Supabase fehlt).";
+    show("error");
+  } else {
+    api("scan", { p_code: code, p_token: token, p_device: device })
+      .then(function (data) {
+        if (data.result === "win") {
+          setS(tokenKey, data.token);
+          token = data.token;
+          if (data.name) { done(data); return; }
+          show("win");
+        } else if (data.result === "used" || data.result === "lose" || data.result === "already") {
+          show(data.result);
+        } else {
+          throw new Error(data.message || "Unbekannte Antwort");
+        }
+        footer(data, data.result);
+      })
+      .catch(function () { show("error"); });
+  }
+
+  $("winForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = $("nameInput").value.trim();
+    if (!name) { $("errorMsg").textContent = "Bitte gib deinen Namen ein."; $("errorMsg").classList.add("show"); return; }
+    $("errorMsg").classList.remove("show");
+    $("submitBtn").disabled = true;
+    $("submitBtn").textContent = "Wird gespeichert...";
+    api("claim", { p_code: code, p_token: token, p_name: name })
+      .then(function (data) {
+        if (data.result === "claimed") { done(data); return; }
+        if (data.result === "used") { show("used"); footer(data, "used"); return; }
+        throw new Error(data.message || "Fehler");
+      })
+      .catch(function () {
+        $("submitBtn").disabled = false;
+        $("submitBtn").textContent = "Nochmal versuchen";
+        $("errorMsg").textContent = "Da ist etwas schiefgelaufen. Bitte nochmal versuchen – dein Code bleibt für dich reserviert.";
+        $("errorMsg").classList.add("show");
+      });
+  });
+
+  // dekorative Glasfaser-Linien
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var field = document.getElementById("fiberfield");
+  var field = $("fiberfield");
   if (!reduce && field) {
-    var W = window.innerWidth;
-    var H = window.innerHeight;
-    var ns = "http://www.w3.org/2000/svg";
+    var W = window.innerWidth, H = window.innerHeight, ns = "http://www.w3.org/2000/svg";
     var svg = document.createElementNS(ns, "svg");
     svg.setAttribute("viewBox", "0 0 " + W + " " + H);
     svg.setAttribute("preserveAspectRatio", "none");
-
-    var strandCount = W < 480 ? 5 : 8;
-    var reds = ["#d21f3c", "#ff3b56", "#8a1729"];
-
-    for (var i = 0; i < strandCount; i++) {
-      var y0 = (H / (strandCount + 1)) * (i + 1) + (Math.random() * 60 - 30);
-      var x1 = W * 0.15, x2 = W * 0.4, x3 = W * 0.6, x4 = W * 0.85;
-      var y1 = y0 + (Math.random() * 80 - 40);
-      var y2 = y0 + (Math.random() * 80 - 40);
-      var y3 = y0 + (Math.random() * 80 - 40);
-      var d = "M -20," + y0 + " C " + x1 + "," + y1 + " " + x2 + "," + y2 + " " + x3 + "," + y3 + " S " + x4 + "," + y0 + " " + (W + 20) + "," + y3;
-
+    var n = W < 480 ? 5 : 8;
+    for (var i = 0; i < n; i++) {
+      var y0 = (H / (n + 1)) * (i + 1) + (Math.random() * 60 - 30);
+      var y1 = y0 + (Math.random() * 80 - 40), y2 = y0 + (Math.random() * 80 - 40), y3 = y0 + (Math.random() * 80 - 40);
+      var d = "M -20," + y0 + " C " + W * 0.15 + "," + y1 + " " + W * 0.4 + "," + y2 + " " + W * 0.6 + "," + y3 + " S " + W * 0.85 + "," + y0 + " " + (W + 20) + "," + y3;
       var path = document.createElementNS(ns, "path");
       path.setAttribute("d", d);
       path.setAttribute("class", "strand");
-      path.setAttribute("stroke", reds[i % reds.length]);
       path.setAttribute("stroke-opacity", (0.25 + Math.random() * 0.35).toFixed(2));
-      var pathId = "strand-" + i;
-      path.setAttribute("id", pathId);
+      path.setAttribute("id", "strand-" + i);
       svg.appendChild(path);
-
       var pulse = document.createElementNS(ns, "circle");
       pulse.setAttribute("r", "3.2");
       pulse.setAttribute("class", "pulse");
@@ -226,13 +324,12 @@
       anim.setAttribute("repeatCount", "indefinite");
       anim.setAttribute("begin", (-Math.random() * 8).toFixed(1) + "s");
       var mpath = document.createElementNS(ns, "mpath");
-      mpath.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#" + pathId);
-      mpath.setAttribute("href", "#" + pathId);
+      mpath.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#strand-" + i);
+      mpath.setAttribute("href", "#strand-" + i);
       anim.appendChild(mpath);
       pulse.appendChild(anim);
       svg.appendChild(pulse);
     }
-
     field.appendChild(svg);
   }
 })();
