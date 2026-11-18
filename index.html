@@ -128,6 +128,13 @@
     animation: spin 0.9s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
+  .prizes {
+    font-size: 14px; line-height: 1.6; color: var(--cream);
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(212,167,60,0.3);
+    border-radius: 12px; padding: 10px 14px; margin: 0 0 18px;
+  }
+  .prizes strong { color: var(--gold); }
+  .hint { font-size: 14px; color: var(--muted); margin: 0 auto; max-width: 38ch; line-height: 1.5; }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -143,6 +150,13 @@
     <div class="spinner" aria-hidden="true"></div>
     <p class="eyebrow">Signal wird geprüft</p>
     <h1>Einen Moment…</h1>
+  </section>
+
+  <section id="v-notstarted" hidden>
+    <p class="eyebrow" id="nsEyebrow">Noch nicht aufgeschaltet</p>
+    <h1 id="nsTitle">Kein Anschluss unter dieser Nummer &ndash; <em>noch nicht</em>.</h1>
+    <p class="lead" id="nsText">Das Signal ist da, aber die Leitung ist noch nicht freigeschaltet.</p>
+    <p class="hint">🤫 Merk dir gut, wo dieser Code versteckt ist &ndash; und verrat es niemandem. Das Spiel wird angekündigt.</p>
   </section>
 
   <section id="v-lose" hidden>
@@ -166,6 +180,7 @@
     <p class="eyebrow">Signal empfangen</p>
     <h1>Verbindung <em>hergestellt</em> – Volltreffer!</h1>
     <p class="lead">Du hast einen echten Gewinn-Code gefunden. Trag jetzt deinen Namen ein &ndash; die Reihenfolge zählt!</p>
+    <p class="prizes">🏆 <strong>1. Platz:</strong> ein geschenkter Ferientag &nbsp;·&nbsp; <strong>2.–6. Platz:</strong> weitere tolle Preise</p>
     <p class="secret">🤫 <strong>Pssst &ndash; nicht verraten!</strong> Dieser Code ist ab jetzt für alle anderen gesperrt. Nur dein Handy kann ihn noch einlösen.</p>
     <form id="winForm">
       <label for="nameInput">Dein Name</label>
@@ -176,7 +191,7 @@
   </section>
 
   <section id="v-done" hidden>
-    <p class="eyebrow">Gespeichert</p>
+    <p class="eyebrow" id="doneEyebrow">Gespeichert</p>
     <h1 id="doneTitle">🎊 Geschafft!</h1>
     <p class="lead" id="doneText"></p>
   </section>
@@ -200,8 +215,8 @@
   var SUPABASE_KEY = "sb_publishable_32rDjFTIeQ7v4QO2mnCEpg_3mc-vYAI";
 
   var $ = function (id) { return document.getElementById(id); };
-  var views = ["loading", "lose", "used", "already", "win", "done", "error"];
-  var tags = { loading: "Verbindung…", lose: "Kein Gewinn", used: "Eingelöst", already: "Schon gewonnen", win: "Volltreffer", done: "Gespeichert", error: "Offline" };
+  var views = ["loading", "notstarted", "lose", "used", "already", "win", "done", "error"];
+  var tags = { loading: "Verbindung…", notstarted: "Wartemusik ♪", lose: "Kein Gewinn", used: "Eingelöst", already: "Schon gewonnen", win: "Volltreffer", done: "Gespeichert", error: "Offline" };
 
   function show(v) {
     views.forEach(function (x) { $("v-" + x).hidden = x !== v; });
@@ -246,10 +261,35 @@
   var tokenKey = "fe_token_" + code;
   var token = getS(tokenKey) || "";
 
+  var SPRUECHE = [
+    ["Noch nicht aufgeschaltet", "Kein Anschluss unter dieser Nummer &ndash; <em>noch nicht</em>.", "Das Signal ist da, aber die Leitung ist noch nicht freigeschaltet."],
+    ["Bauarbeiten im Netz", "Die Glasfaser liegt &ndash; nur das <em>Licht</em> ist noch aus.", "Unsere Techniker schalten demnächst auf. Genauer Termin? Irgendwann zwischen jetzt und später."],
+    ["Warteschlange", "Bitte haben Sie <em>etwas Geduld</em>.", "Sie werden mit dem nächsten freien Gewinn verbunden. ♪ Wartemusik ♪"],
+    ["Ping fehlgeschlagen", "Zielhost <em>noch nicht</em> erreichbar.", "Request timed out. Das Gewinnspiel bootet noch &ndash; bitte später nochmals versuchen."],
+    ["Störungsmeldung", "Gewinn-Signal <em>noch gedämpft</em>.", "Die Dämpfung ist aktuell zu hoch. Sobald das Netz freigegeben ist, kommt hier volles Licht an."]
+  ];
+
+  function notStarted() {
+    var sp = SPRUECHE[Math.floor(Math.random() * SPRUECHE.length)];
+    $("nsEyebrow").innerHTML = sp[0];
+    $("nsTitle").innerHTML = sp[1];
+    $("nsText").innerHTML = sp[2];
+    show("notstarted");
+    $("footer").innerHTML = "Hier ist bald ein Signal. Ob es ein Treffer ist? Das verraten wir noch nicht.";
+  }
+
   function done(data) {
     var first = String(data.name || "").split(" ")[0];
     $("doneTitle").textContent = "🎊 Geschafft" + (first ? ", " + first : "") + "!";
-    $("doneText").textContent = "Du bist Gewinner Nr. " + data.rang + " von " + (data.total || 6) + ". Dein Preis wartet heute Abend bei der Preisübergabe auf dich. Und weiterhin: psst! 🤫";
+    var nr = "Du bist Gewinner Nr. " + data.rang + " von " + (data.total || 6) + ". ";
+    var DONE = [
+      ["Verbindung gespeichert!", nr + "Was am anderen Ende der Leitung auf dich wartet, erfährst du bei der Preisübergabe. Bis dahin: Funkstille! 🤫"],
+      ["Datenpaket zugestellt!", nr + "Der Inhalt wird bei der Preisübergabe entschlüsselt. Bis dahin: psst! 🤫"],
+      ["Volle Bandbreite!", nr + "Was du gewonnen hast, wird bei der Preisübergabe aufgeschaltet. Bis dahin: Funkstille! 🤫"]
+    ];
+    var pick = DONE[Math.floor(Math.random() * DONE.length)];
+    $("doneEyebrow").textContent = pick[0];
+    $("doneText").textContent = pick[1];
     show("done");
     footer(data, "done");
   }
@@ -261,6 +301,7 @@
   } else {
     api("scan", { p_code: code, p_token: token, p_device: device })
       .then(function (data) {
+        if (data.result === "notstarted") { notStarted(); return; }
         if (data.result === "win") {
           setS(tokenKey, data.token);
           token = data.token;
@@ -286,6 +327,7 @@
     api("claim", { p_code: code, p_token: token, p_name: name })
       .then(function (data) {
         if (data.result === "claimed") { done(data); return; }
+        if (data.result === "notstarted") { notStarted(); return; }
         if (data.result === "used") { show("used"); footer(data, "used"); return; }
         if (data.result === "already") { try { localStorage.removeItem(tokenKey); } catch (e) {} show("already"); footer(null, "already"); return; }
         throw new Error(data.message || "Fehler");
